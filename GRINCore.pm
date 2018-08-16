@@ -20,6 +20,7 @@ $showRaw
 $iterations
 $showDetails
 $likeChris
+$roundEffective
 $alternate
 $preferenceMargin
 );
@@ -43,14 +44,15 @@ BEGIN {
 
  $peoplePerPopulation = $peoplePerTeam * $teamsPerPopulation;
 
- $showHiLo = '';    # default: do not show High and Low values along with averages in final results
- $fixedData = '';   # default: use random data, not Chris's fixed data.
- $showRaw = '';     # default: do not display raw data for each person in each pool.
- $iterations = 1;   # default: run for 1 set of populations
- $showDetails = ''; # default: do not display results for each population, only a summary
- $likeChris = '';   # default: do not do calculations like Chris (rounding up, percentiles, etc.)
- $showHelp = '';    # defaut: do not show help
- $alternate = '';   # default: do not use alternate random distribution method
+ $showHiLo = '';      # default: do not show High and Low values along with averages in final results
+ $fixedData = '';     # default: use random data, not Chris's fixed data.
+ $showRaw = '';       # default: do not display raw data for each person in each pool.
+ $iterations = 1;     # default: run for 1 set of populations
+ $showDetails = '';   # default: do not display results for each population, only a summary
+ $likeChris = 1;      # default: do percentiles like Chris 
+ $roundEffective = '' # default: do not round effective scores
+ $showHelp = '';      # defaut: do not show help
+ $alternate = '';     # default: do not use alternate random distribution method
 
 GetOptions ('hilo' => \$showHiLo,
             'a' => \$alternate,
@@ -59,6 +61,7 @@ GetOptions ('hilo' => \$showHiLo,
             'f' => \$fixedData,
             'r' => \$showRaw,
             'c' => \$likeChris,
+	    'e' => \$roundEffective,
             'i=i' => \$iterations,
             'n=i' => \$iterations,
             'd' => \$showDetails);
@@ -111,7 +114,8 @@ COMMAND LINE OPTION
 	--hilo	Display High and Low team values along with averages in final results
 	-f	Use fixed data (primarily for testing)
 	-r	Display raw population data
-	-c	Do calculations like Chris (round up, no interpolation for percentiles)
+	-c	Interpolate percentiles (unlike Chris)
+	-e      Round up effective scores      
 	-d	Show details, that is, the AC average date for each iteration, as well as the final summary
 	-i integer, -n integer
 		Number of iterations (unique complete populations) to run.

@@ -39,8 +39,8 @@ sub assignEffectiveResources {
    $resources{'eMax'} = 0;
    foreach my $category (@categoryTypes) {
       if ($category ne 'H') {
-         if ($likeChris) {
-            # like Chris: round up so we have integers only when we add H to other categories.
+         if ($roundEffective) {
+            # round Effective: round up so we have integers only when we add H to other categories.
             $resources{"e$category"} = $resources{$category} + int ($weightH*$resources{'H'} + 0.9)
          } else {
             $resources{"e$category"} = $resources{$category} + $weightH*$resources{'H'}
